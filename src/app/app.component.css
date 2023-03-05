@@ -1,0 +1,41 @@
+#listaProducto{
+  margin: 40px;
+}
+
+#tabla {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+#tabla td, #tabla th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+#tabla tr:nth-child(2n){
+  background-color:#C4F7CE;
+}
+
+#tabla tr:nth-child(2n+1){
+  background-color:#F7ECE8;
+}
+
+#tabla tr:hover {background-color: #ECEFAC;}
+
+
+.form-select{
+  /*background-color: green !important;
+  color: white !important;*/
+  border: 1px solid green !important;
+}
+.form-control{
+  border: 1px solid green !important;
+}
+.table-hover{
+  background-color: green !important;
+  color: white !important;
+}
+.error{
+  color: red;
+  font-size: 10px;
+}

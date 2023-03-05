@@ -1,0 +1,133 @@
+<div id="listaProducto">
+  <div class="card text-center">
+    <div class="card-header">
+      Tareas
+    </div>
+    <div class="card-body" style="display: inline-flex;margin: auto;">
+      <div>
+        <input type="text" class="form-control" placeholder="Buscar por nombre" #buscarbyName
+          (keyup)="findTasks(buscarbyName.value)">
+      </div>
+      <div style="margin-right: 10px;margin-left: 10px;">
+        <select class="form-select" (change)="filterTasks($event)">
+          <option value="Todas">Todas</option>
+          <option value="{{item}}" *ngFor="let item of  arrayCataegory">{{item}}</option>
+
+        </select>
+      </div>
+      <a  class="btn" style="background-color: green; color:white;" data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="resetForm()">
+        +
+      </a>
+
+
+    </div>
+    <div>
+
+    </div>
+
+  </div>
+
+
+<!--Inicio lista-->
+
+<table id="tabla">
+  <th>Categoria</th>
+  <th>Nombre</th>
+  <th>Descripcion</th>
+  <th>Estado</th>
+  <th>Fecha limite</th>
+  <th>Acción</th>
+
+  <tr *ngFor="let item of datos">
+    <td>{{item.category}}</td>
+    <td>{{item.name}}</td>
+    <td>{{item.description}}</td>
+    <td>{{item.state?'Realizada':'Por hacer'}}</td>
+    <td>{{item.dateTask| date:'dd/MM/yyyy'}}</td>
+    <td>
+      <button (click)="emitirIdTask(item.id)" style="--bs-btn-padding-x: 0.2rem !important;
+      --bs-btn-padding-y: 0.2rem !important;" type="button" class="btn btn-success"  ><app-task-item></app-task-item></button>
+
+    </td>
+  </tr>
+</table>
+</div>
+
+   <!--inicio formulario-->
+
+
+<!-- Modal -->
+<div  class="modal fade" id="exampleModal" tabindex="-1" >
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Formulario</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="form">
+          <div class="form-group">
+            <label for="exampleFormControlInput1">Nombre:</label>
+            <input type="text"  class="form-control" id="exampleFormControlInput1" formControlName="name">
+            <ng-container *ngIf="!submittedForm">
+              <div class="error" *ngIf="form.controls['name'].invalid">
+                <span *ngIf="this.form.get('name')?.errors?.['maxlength']">
+                  El máximo de carácteres permitido es 15
+                </span>
+                <div *ngIf="this.form.get('name')?.errors?.['havespace']">
+                  {{massaje}}
+                </div>
+              </div>
+            </ng-container>
+          </div>
+          <label for="exampleInputPassword1" class="form-label">Categoria</label>
+          <select   formControlName="category" class="form-select" aria-label="Default select example">
+            <option value=" ">-- Seleccione --</option>
+            <option value="{{item}}" *ngFor="let item of  arrayCataegory">{{item}}</option>
+
+
+          </select>
+          <ng-container *ngIf="!submittedForm">
+            <div class="error" *ngIf="form.controls['category'].invalid">
+              <div *ngIf="this.form.get('category')?.errors?.['havespace']">
+                {{massaje}}
+              </div>
+            </div>
+          </ng-container>
+          <div class="form-group">
+            <label for="exampleFormControlInput1">Fecha limite:</label>
+            <input type="date" min="{{time}}" class="form-control" id="exampleFormControlInput1" formControlName="dateTask">
+            <ng-container *ngIf="!submittedForm">
+              <div class="error" *ngIf="form.controls['dateTask'].invalid">
+                <div *ngIf="this.form.get('dateTask')?.errors?.['havespace']">
+                  {{massaje}}
+                </div>
+              </div>
+            </ng-container>
+          </div>
+          <div class="form-group">
+            <label for="exampleFormControlTextarea1">Descripción</label>
+            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"
+              formControlName="description"></textarea>
+              <ng-container *ngIf="!submittedForm">
+                <div class="error" *ngIf="form.controls['description'].invalid">
+                  <span *ngIf="this.form.get('description')?.errors?.['maxlength']">
+                    El máximo de carácteres permitido es 100
+                  </span>
+                  <div *ngIf="this.form.get('description')?.errors?.['havespace']">
+                    {{massaje}}
+                  </div>
+                </div>
+              </ng-container>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" (click)="saveTask()">Guardar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<router-outlet></router-outlet>
