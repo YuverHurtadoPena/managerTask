@@ -1,7 +1,7 @@
-<div id="listaProducto">
+<div id="managerTask">
   <div class="card text-center">
     <div class="card-header">
-      Tareas
+      <strong>GESTION DE TAREAS</strong>
     </div>
     <div class="card-body" style="display: inline-flex;margin: auto;">
       <div>
@@ -21,6 +21,7 @@
 
 
     </div>
+
     <div>
 
     </div>
@@ -29,7 +30,7 @@
 
 
 <!--Inicio lista-->
-
+<div *ngIf="datos.length!==0" class="responsive">
 <table id="tabla">
   <th>Categoria</th>
   <th>Nombre</th>
@@ -38,7 +39,7 @@
   <th>Fecha limite</th>
   <th>Acción</th>
 
-  <tr *ngFor="let item of datos">
+  <tr *ngFor="let item of datos" [ngClass]="{'tachar': item.state===true}">
     <td>{{item.category}}</td>
     <td>{{item.name}}</td>
     <td>{{item.description}}</td>
@@ -51,6 +52,12 @@
     </td>
   </tr>
 </table>
+</div>
+</div>
+<div *ngIf="datos.length===0" style="display: grid;place-items: center;">
+
+  <strong>Sin resultados.</strong>
+
 </div>
 
    <!--inicio formulario-->
@@ -123,7 +130,7 @@
         </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary" (click)="saveTask()">Guardar</button>
+        <button type="button" class="btn color-save" (click)="saveTask()">Guardar</button>
       </div>
     </div>
   </div>

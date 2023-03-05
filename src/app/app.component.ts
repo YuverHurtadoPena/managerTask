@@ -14,11 +14,7 @@ export class AppComponent {
 
 
   title = 'taskproyecto';
-  @Input()
-  count: number = 0;
 
-  @Output()
-  mal= new EventEmitter<number>();
 
   private service: TaskService;
 

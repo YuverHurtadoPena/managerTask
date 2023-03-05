@@ -1,4 +1,4 @@
-#listaProducto{
+#managerTask{
   margin: 40px;
 }
 
@@ -38,4 +38,20 @@
 .error{
   color: red;
   font-size: 10px;
+}
+.color-save{
+  background-color: green;
+  color: white;
+}
+
+.tachar{
+  text-decoration: line-through;
+}
+
+@media screen and (max-width: 767px){
+  .responsive{
+    overflow-x: scroll;
+    scroll-behavior: auto;
+
+}
 }
